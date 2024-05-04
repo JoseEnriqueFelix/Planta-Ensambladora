@@ -6,13 +6,12 @@ public class EstacionDeTrabajo {
     private int tiempo, tiempo2; // tiempo2 para caso especial de motor-transmision
     private Robot[] robots, robots2; // robots2 para caso especial de motor-transmision
     private Semaforo estacionRobots, estacionRobots2; // estacionRobots2 para caso especial de motor-transmision
-    private Semaforo manejarRemoveCola, manejarAddCola, manejarRemoveCola2, manejarAddCola2;
+    private Semaforo manejarCola, manejarCola2;
     private Queue<Robot> cola, cola2; // cola2 para caso especial de motor-transmision
 
     public EstacionDeTrabajo(String nombre, int tiempo, int cantidadRobots) {
         cola = new LinkedList<>();
-        manejarAddCola = new Semaforo(1);
-        manejarRemoveCola = new Semaforo(1);
+        manejarCola = new Semaforo(1);
         this.nombre = nombre;
         this.tiempo = tiempo;
         estacionRobots = new Semaforo(cantidadRobots);
@@ -23,10 +22,8 @@ public class EstacionDeTrabajo {
     public EstacionDeTrabajo(String nombre, int tiempo, int tiempo2, int cantidadRobots, int cantidadRobots2) {
         cola = new LinkedList<>();
         cola2 = new LinkedList<>();
-        manejarAddCola = new Semaforo(1);
-        manejarRemoveCola = new Semaforo(1);
-        manejarAddCola2 = new Semaforo(1);
-        manejarRemoveCola2 = new Semaforo(1);
+        manejarCola = new Semaforo(1);
+        manejarCola2 = new Semaforo(1);
         this.nombre = nombre;
         this.tiempo = tiempo;
         this.tiempo2 = tiempo2;
@@ -81,19 +78,11 @@ public class EstacionDeTrabajo {
         return cola2;
     }
 
-    public Semaforo getManejarRemoveCola() {
-        return manejarRemoveCola;
+    public Semaforo getManejarCola() {
+        return manejarCola;
     }
 
-    public Semaforo getManejarAddCola() {
-        return manejarAddCola;
-    }
-
-    public Semaforo getManejarRemoveCola2() {
-        return manejarRemoveCola2;
-    }
-
-    public Semaforo getManejarAddCola2() {
-        return manejarAddCola2;
+    public Semaforo getManejarCola2() {
+        return manejarCola2;
     }
 }
