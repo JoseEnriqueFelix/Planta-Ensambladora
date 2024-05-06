@@ -24,12 +24,16 @@ public class App {
         estacionesDeTrabajo[5] = new EstacionDeTrabajo("Pruebas", 10, 5);
         n = Rutinas.nextInt(LIM_INFERIOR_N, LIM_SUPERIOR_N);
         LineaDeProduccion[] lineasDeProduccion = new LineaDeProduccion[n];
+        Vista vista = new Vista(estacionesDeTrabajo, lineasDeProduccion);
         for(int i=0; i<lineasDeProduccion.length; i++){
-            lineasDeProduccion[i] = new LineaDeProduccion(estacionesDeTrabajo);
+            lineasDeProduccion[i] = new LineaDeProduccion(estacionesDeTrabajo, i+1, vista);
             lineasDeProduccion[i].setName("Linea de produccion " + (i+1) + ": ");
         }
+        vista.hazInterfaz();
+        //System.out.println(lineasDeProduccion.length);
         for(int i=0; i<lineasDeProduccion.length; i++){
             lineasDeProduccion[i].start();
         }
+        
     }
 }
