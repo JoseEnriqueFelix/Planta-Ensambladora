@@ -31,8 +31,14 @@ public class Vista extends JFrame {
         setVisible(true);
     }
 
-    public void actualizar(int idLineaDeProduccion, int carro){
+    public void actualizar(int idLineaDeProduccion, int carro, int linea, Robot auxRobot){
         matriz[idLineaDeProduccion][0].setText("Linea #" + idLineaDeProduccion + '\n' + "Automovil #" + carro);
+        for(int i=1; i<estacionesDeTrabajo.length + 1; i++){
+            if(linea == i)
+                matriz[idLineaDeProduccion][i].setText("Aqui\n" + auxRobot.getNombreRobot());
+            else
+                matriz[idLineaDeProduccion][i].setText("");
+        }
         revalidate();
     }
 }    

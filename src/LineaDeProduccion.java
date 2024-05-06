@@ -1,7 +1,7 @@
 public class LineaDeProduccion extends Thread {
 
     private EstacionDeTrabajo[] estaciones;
-    private final int MAX_CARROS_PRODUCIDOS = 50;
+    private final int MAX_CARROS_PRODUCIDOS = 100;
     private int idLineaDeProduccion;
     private Vista vista;
 
@@ -17,7 +17,7 @@ public class LineaDeProduccion extends Thread {
         Control.getS1().Espera();
         auxNumDeCarro = Control.getNumeroDeCarros() + 1;
         Control.setNumeroDeCarros(auxNumDeCarro);
-        //vista.actualizar(idLineaDeProduccion, auxNumDeCarro);
+        // vista.actualizar(idLineaDeProduccion, auxNumDeCarro);
         Control.getS1().Libera();
         while (auxNumDeCarro <= MAX_CARROS_PRODUCIDOS) {
             for (int i = 0; i < estaciones.length; i++) {
@@ -26,11 +26,11 @@ public class LineaDeProduccion extends Thread {
                 auxRobot = estaciones[i].getCola().remove();
                 estaciones[i].getManejarCola().Libera();
                 int cantDormir = estaciones[i].getTiempo();
-                dormir(cantDormir);
-                vista.actualizar(idLineaDeProduccion, auxNumDeCarro);
+                vista.actualizar(idLineaDeProduccion, auxNumDeCarro, i+1, auxRobot);
                 System.out.printf("%1s, %10d, %30s, %30s \n", getName(), auxNumDeCarro, estaciones[i].getNombre(),
                         auxRobot);
-                
+                dormir(cantDormir);
+
                 if (estaciones[i].getRobots2() != null) {
                     estaciones[i].getEstacionRobots2().Espera();
                     estaciones[i].getManejarCola2().Espera();
@@ -41,11 +41,11 @@ public class LineaDeProduccion extends Thread {
                     estaciones[i].getManejarCola2().Libera();
                     estaciones[i].getEstacionRobots().Libera();
                     cantDormir = estaciones[i].getTiempo2();
-                    dormir(cantDormir);
-                    vista.actualizar(idLineaDeProduccion, auxNumDeCarro);
+                    vista.actualizar(idLineaDeProduccion, auxNumDeCarro, i+1, auxRobot);
                     System.out.printf("%1s, %10d, %30s, %30s \n", "CE" + getName(), auxNumDeCarro,
                             estaciones[i].getNombre(),
                             auxRobot);
+                    dormir(cantDormir);
                     estaciones[i].getManejarCola2().Espera();
                     estaciones[i].getCola2().add(auxRobot);
                     estaciones[i].getManejarCola2().Libera();
@@ -60,14 +60,14 @@ public class LineaDeProduccion extends Thread {
             Control.getS1().Espera();
             auxNumDeCarro = Control.getNumeroDeCarros() + 1;
             Control.setNumeroDeCarros(auxNumDeCarro);
-            //vista.actualizar(idLineaDeProduccion, auxNumDeCarro);
+            // vista.actualizar(idLineaDeProduccion, auxNumDeCarro);
             Control.getS1().Libera();
         }
     }
 
     private void dormir(int cantDormir) {
         try {
-            sleep(cantDormir);
+            sleep(cantDormir * 100);
         } catch (InterruptedException e) {
         }
     }
