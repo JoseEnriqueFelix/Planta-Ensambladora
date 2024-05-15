@@ -37,7 +37,7 @@ public class EstacionDeTrabajo {
 
     private void inicializarRobots(Robot[] rbts, Queue<Robot> queue) {
         for (int i = 0; i < rbts.length; i++) {
-            rbts[i] = new Robot(Rutinas.nextNombre(1), i + 1);
+            rbts[i] = new Robot(nombre, i + 1);
             queue.add(rbts[i]);
         }
     }

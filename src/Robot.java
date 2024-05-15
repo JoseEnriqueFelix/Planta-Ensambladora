@@ -16,6 +16,6 @@ public class Robot {
     }
 
     public String toString(){
-        return "Robot: " + numeroDeSerie + ", Nombre del robot: " + nombreRobot;
+        return "Robot: " + nombreRobot + " " + numeroDeSerie;
     }
 }
