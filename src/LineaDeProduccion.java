@@ -36,29 +36,35 @@ public class LineaDeProduccion extends Thread {
 
                 dormir(cantDormir);
 
-                // if (estaciones[i].getRobots2() != null) {
-                // estaciones[i].getEstacionRobots2().Espera();
-                // estaciones[i].getManejarCola2().Espera();
-                // estaciones[i].getManejarCola().Espera();
-                // estaciones[i].getCola().add(auxRobot);
-                // estaciones[i].getManejarCola().Libera();
-                // vista.soltar(idLineaDeProduccion, i + 1);
-                // auxRobot = estaciones[i].getCola2().remove();
-                // estaciones[i].getManejarCola2().Libera();
-                // estaciones[i].getEstacionRobots().Libera();
-                // cantDormir = estaciones[i].getTiempo2();
-                // vista.tomar(idLineaDeProduccion, auxNumDeCarro, i + 1, auxRobot);
-                // System.out.println(
-                // getName() + ", " + auxNumDeCarro + ", " + estaciones[i].getNombre() + ", " +
-                // auxRobot);
-                // dormir(cantDormir);
-                // estaciones[i].getManejarCola2().Espera();
-                // estaciones[i].getCola2().add(auxRobot);
-                // estaciones[i].getManejarCola2().Libera();
-                // estaciones[i].getEstacionRobots2().Libera();
-                // vista.soltar(idLineaDeProduccion, i + 1);
-                // continue;
-                // }
+                if (estaciones[i].getRobots2() != null) {
+                    estaciones[i].getEstacionRobots2().Espera();
+                    estaciones[i].getManejarCola2().Espera();
+                    estaciones[i].getManejarCola().Espera();
+                    estaciones[i].getCola().add(auxRobot);
+                    estaciones[i].getManejarCola().Libera();
+                    auxRobot = estaciones[i].getCola2().remove();
+                    estaciones[i].getManejarCola2().Libera();
+                    estaciones[i].getEstacionRobots().Libera();
+                    cantDormir = estaciones[i].getTiempo2();
+                    vista.tomar(idLineaDeProduccion, auxNumDeCarro, i + 1, auxRobot);
+                    System.out.println(
+                            getName() + ", " + auxNumDeCarro + ", " + estaciones[i].getNombre() + ", " +
+                                    auxRobot);
+                    dormir(cantDormir);
+                    estaciones[i].getManejarCola2().Espera();
+                    estaciones[i].getCola2().add(auxRobot);
+                    estaciones[i].getManejarCola2().Libera();
+                    estaciones[i].getEstacionRobots2().Libera();
+                    if (i == estaciones.length - 1) {
+                        vista.soltar(idLineaDeProduccion, i + 1);
+                        s[i].Libera();
+                        break;
+                    }
+                    s[i + 1].Espera();
+                    s[i].Libera();
+                    continue;
+                }
+
                 estaciones[i].getManejarCola().Espera();
                 estaciones[i].getCola().add(auxRobot);
                 estaciones[i].getManejarCola().Libera();

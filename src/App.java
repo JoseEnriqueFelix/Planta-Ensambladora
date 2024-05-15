@@ -19,8 +19,7 @@ public class App {
     public static void main(String[] args) {
         EstacionDeTrabajo[] estacionesDeTrabajo = new EstacionDeTrabajo[NUMERO_ESTACIONES];
         estacionesDeTrabajo[0] = new EstacionDeTrabajo("Chasis y cableado", 20, 5);
-        // estacionesDeTrabajo[1] = new EstacionDeTrabajo("Motor-Transmision", 6, 4, 4, 2);
-        estacionesDeTrabajo[1] = new EstacionDeTrabajo("Motor-Transmision", 6, 4);
+        estacionesDeTrabajo[1] = new EstacionDeTrabajo("Motor-Transmision", 6, 4, 4, 2);
         estacionesDeTrabajo[2] = new EstacionDeTrabajo("Carroceria", 10, 3);
         estacionesDeTrabajo[3] = new EstacionDeTrabajo("Interiores", 5, 3);
         estacionesDeTrabajo[4] = new EstacionDeTrabajo("Llantas", 5, 2);
